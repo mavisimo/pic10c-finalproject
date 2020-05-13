@@ -4,6 +4,7 @@ Final project for PIC10C
 ### Progress Documentation:
 * **05/04/2020**: project proposal, see below
 * **05/08/2020**: received project approval, see proposal for further implementation plans/goals
+* **05/12/2020**: created random block and fill generator functions, can now apply these functions to each row of a nonogram puzzle to randomly generate a nonogram (the next step)
 
 ### Proposal:
 Chose **2. nonogram game**:
