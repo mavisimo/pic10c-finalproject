@@ -2,6 +2,10 @@
 #define NONOGRAM_H
 
 #include <QMainWindow>
+#include <QWidget>
+#include <QToolButton>
+#include <QGridLayout>
+#include <iostream>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class nonogram; }
