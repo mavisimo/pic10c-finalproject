@@ -5,6 +5,7 @@ Final project for PIC10C
 * **05/04/2020**: project proposal, see below
 * **05/08/2020**: received project approval, see proposal for further implementation plans/goals
 * **05/12/2020**: created random block and fill generator functions, can now apply these functions to each row of a nonogram puzzle to randomly generate a nonogram (the next step)
+* **05/17/2020**: began creating layout in Qt
 
 ### Proposal:
 Chose **2. nonogram game**:
