@@ -24,15 +24,8 @@ vector<int> random_block(int n)
 	return blocks;
 }
 
-bool random_fill()
-{
-    bool fill = true;
-	int x = rand() % 2;
-	if (x == 1) fill = false;
-	return fill;
-}
 
-vector<bool> fill_generator(int n)
+/*vector<bool> fill_generator(int n)
 {
     bool start_fill = true;
 	int x = rand() % 2;
@@ -40,6 +33,23 @@ vector<bool> fill_generator(int n)
 	vector<bool> fills(n, start_fill);
 	for (int i=1; i<n; i+=2) { fills[i] = !start_fill; }
 	return fills;
+}*/
+
+vector<vector<int> > create_solution(int n)
+{
+	vector<vector<int> > nonogram(n,vector<int>(n,0));
+    for (int i = 0; i < n; i++)
+    {
+        vector<int> row = random_block(n);
+        int h = 0;
+        bool fill = true; if ((rand() % 2) == 1) fill = false;
+        for (int j = 0; j < row.size(); j++)
+        {
+            while (row[j] > 0) { if (fill) nonogram[i][h] = 1; row[j] -= 1; h++; }
+            fill = !fill;
+        }
+    }
+    return nonogram;
 }
 
 
@@ -50,6 +60,16 @@ int main()
 
 	cout << "Input row length: ";
 	cin >> length;
+    
+    vector<vector<int> > nonogram = create_solution(length);
+    cout << "Generated nonogram solution: " << endl;
+    for (int i = 0; i < nonogram.size(); i++)
+    {
+        for (int j = 0; j < nonogram.size(); j++) 
+        	cout << " " << nonogram[i][j] << " ";
+        cout << endl;
+    }
+/*
 	vector<int> blocks = random_block(length);
 	static int size = blocks.size();
 	vector<bool> fills = fill_generator(size);
@@ -61,7 +81,7 @@ int main()
 		if (fills[i]) cout << "Filled ";
 		else cout << "Blanks ";
 	}
-
+*/
 	return 0;
 }
 
