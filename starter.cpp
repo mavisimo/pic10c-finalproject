@@ -59,22 +59,25 @@ vector<vector<int> > create_clues(int n, vector<vector<int> > solution)
 	vector<vector<int> > clues(2*n);
 	for (int i = 0; i < n; i++)
 	{
-		int count1, count2, j = 0;
-		while (j < n)
+		int count1=0, count2=0, j = 0;
+		for (int j = 0; j < n; j++)
 		{
-			if (solution[i][j] == 1 && count1 != 0) 
+			if ((solution[i][j] == 1 && count1 != 0) || (j == n-1)) 
 			{
-				clues[i].push_back(count1);
+				if (solution[i][j]== 0) count1++;
+				if (count1 > 0) clues[i].push_back(count1);
 				count1 = 0;
 			}
 			else if (solution[i][j] == 0) count1++;
-			if (solution[j][i] == 1 && count2 != 0) 
+			else continue;
+			if ((solution[j][i] == 1 && count2 != 0) || (j == n-1)) 
 			{
-				clues[n+i].push_back(count2);
+				if (solution[j][i]== 0) count2++;
+				if (count2 > 0) clues[n+i].push_back(count2);
 				count2 = 0;
 			}
 			else if (solution[j][i] == 0) count2++;
-			j++;
+			else continue;
 		}
 	}
 	return clues;
@@ -115,7 +118,7 @@ int main()
 
     vector<vector<int> > clues = create_clues(length, nonogram);
     cout << "Testing clues output: " << endl;
-    for (int i = 0; i < length; i++)
+    for (int i = 0; i < 2*length; i++)
     {
         for (int j = 0; j < clues[i].size(); j++) 
         	cout << " " << clues[i][j] << " ";
@@ -126,6 +129,21 @@ int main()
     vector<vector<int> > coords(length,vector<int>(length,2));
     cout << "Playing Board: " << endl;
     print_board(length,coords);
+
+    int lives = 3;
+    int rowNum, colNum;
+    while (lives > 0)
+    {
+    	while(!(cin >> rowNum >> colNum) || rowNum>=length || rowNum<0 || colNum>=length || colNum<0)
+    	{
+        	cin.clear();
+        	cin.ignore(1000, '\n');
+        	cout << "Please Enter a valid coordinate:" << endl;
+    	}
+    	if (nonogram[rowNum][colNum] != 0) lives--;
+    	coords[rowNum][colNum] == nonogram[rowNum][colNum];
+    	print_board(length,coords);
+    }
 
 /*
 	vector<int> blocks = random_block(length);
