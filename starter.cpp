@@ -6,6 +6,7 @@ blank. The list of numbers should sum up to the length.
 */
 
 #include <iostream>
+#include <iomanip>
 #include <cmath>
 #include <stdlib.h>
 #include <ctime>
@@ -24,7 +25,6 @@ vector<int> random_block(int n)
 	return blocks;
 }
 
-
 /*vector<bool> fill_generator(int n)
 {
     bool start_fill = true;
@@ -35,6 +35,7 @@ vector<int> random_block(int n)
 	return fills;
 }*/
 
+// randomly generate 0 for filled, 1 for empty space
 vector<vector<int> > create_solution(int n)
 {
 	vector<vector<int> > nonogram(n,vector<int>(n,0));
@@ -50,6 +51,48 @@ vector<vector<int> > create_solution(int n)
         }
     }
     return nonogram;
+}
+
+// 2n rows to store columns then rows
+vector<vector<int> > create_clues(int n, vector<vector<int> > solution)
+{
+	vector<vector<int> > clues(2*n);
+	for (int i = 0; i < n; i++)
+	{
+		int count1, count2, j = 0;
+		while (j < n)
+		{
+			if (solution[i][j] == 1 && count1 != 0) 
+			{
+				clues[i].push_back(count1);
+				count1 = 0;
+			}
+			else if (solution[i][j] == 0) count1++;
+			if (solution[j][i] == 1 && count2 != 0) 
+			{
+				clues[n+i].push_back(count2);
+				count2 = 0;
+			}
+			else if (solution[j][i] == 0) count2++;
+			j++;
+		}
+	}
+	return clues;
+}
+
+
+void print_board(int n, vector<vector<int> > coords)
+{
+    for (int i = 0; i < n; i++)
+    {
+    	for (int j = 0; j < n; j++)
+    	{
+    		if (coords[i][j] == 0) cout << "  " << "O" << "  ";
+    		else if (coords[i][j] == 1) cout << "  " << "X" << "  ";
+    		else cout << "  " << "-" << "  ";
+    	}
+    	cout << endl;
+    }
 }
 
 
@@ -69,6 +112,21 @@ int main()
         	cout << " " << nonogram[i][j] << " ";
         cout << endl;
     }
+
+    vector<vector<int> > clues = create_clues(length, nonogram);
+    cout << "Testing clues output: " << endl;
+    for (int i = 0; i < length; i++)
+    {
+        for (int j = 0; j < clues[i].size(); j++) 
+        	cout << " " << clues[i][j] << " ";
+        cout << endl;
+    }
+
+    // will be comparing coords to solution to update board
+    vector<vector<int> > coords(length,vector<int>(length,2));
+    cout << "Playing Board: " << endl;
+    print_board(length,coords);
+
 /*
 	vector<int> blocks = random_block(length);
 	static int size = blocks.size();
