@@ -8,7 +8,8 @@ Final project for PIC10C
 * **05/17/2020**: began creating layout in Qt, issues with button spacing and window sizing to fit puzzles as large as 15x15 and higher to be resolved in future
 * **05/21/2020**: working on C++ code to generate a nonogram solution to then begin coding the game, possible thoughts of weighting the random generator of the puzzle in some way such that there are more fill blocks than empty to make it easier to solve?
 * **05/28/2020**: working on printing nonogram game board, figured out using another matrix to keep track of coordinates checked but struggling with converting solution matrix into clues to be printed on empty board
-* **05/29/2020 fixed generating horizontal clues but something's not working on counting the vertical clues... began simple user input and life system C++ nonogram game
+* **05/29/2020 fixed generating horizontal clues but something's not working on counting the vertical clues... began simple user input and life system C++ nonogram game but need some way to end game when all filled blocks are found
+
 
 ### Proposal:
 Chose **2. nonogram game**:
