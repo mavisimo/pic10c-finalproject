@@ -8,7 +8,9 @@ Final project for PIC10C
 * **05/17/2020**: began creating layout in Qt, issues with button spacing and window sizing to fit puzzles as large as 15x15 and higher to be resolved in future
 * **05/21/2020**: working on C++ code to generate a nonogram solution to then begin coding the game, possible thoughts of weighting the random generator of the puzzle in some way such that there are more fill blocks than empty to make it easier to solve?
 * **05/28/2020**: working on printing nonogram game board, figured out using another matrix to keep track of coordinates checked but struggling with converting solution matrix into clues to be printed on empty board
-* **05/29/2020 fixed generating horizontal clues but something's not working on counting the vertical clues... began simple user input and life system C++ nonogram game but need some way to end game when all filled blocks are found
+* **05/29/2020** fixed generating horizontal clues but something's not working on counting the vertical clues... began simple user input and life system C++ nonogram game but need some way to end game when all filled blocks are found
+* **06/03/2020**: spent a long time making fine edits to print the clues, especially printing the verticle clues I ultimately needed many loops to find the max length to know how many rows I needed to print before the board, then finding the right set width. I STRONGLY ADVISE choosing a board size of <10 for the sake of being able to solve a randomly generated puzzle and formatting consistency (couldn't decide on a suitable equation for setw of varying board sizes)
+* I wanted something playable to present by the end of this quarter but if time permits I will try to transfer this C++ code onto Qt for better interface
 
 
 ### Proposal:

@@ -82,17 +82,44 @@ vector<vector<int> > create_clues(int n, vector<vector<int> > solution)
 	return clues;
 }
 
-
-void print_board(int n, vector<vector<int> > coords, vector<vector<int> > clues)
+int find_vert_max(int n, vector<vector<int> > clues)
 {
+	int max = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if (clues[n+i].size() > max) max = clues[n+i].size();
+	}
+	return max;
+}
+
+void print_board(int n, int max, vector<vector<int> > coords, vector<vector<int> > clues)
+{
+	//vertical clues
+	int t = max;
+	while (t > 0)
+	{
+		cout << setw(11);
+		for (int i = 0; i < n; i++)
+		{
+			int s = clues[n+i].size();
+			if (s >= t) cout << clues[n+i][s-t] << "    ";
+			else cout << "     ";
+		}
+		t--;
+		cout << endl;
+	}
     for (int i = 0; i < n; i++)
     {
-    	for (int k = 0; k < clues[i].size(); k++) cout << " " << clues[i][k] << " ";
+    	// horizontal clues
+    	for (int k = 0; k < clues[i].size(); k++) cout << "  " << clues[i][k];
+    	int s = (10) - clues[i].size()*3;
+    	if (clues[i].size() < 1) { cout << "  0"; s = (10) - 3; }
+    	cout << setw(s);
     	for (int j = 0; j < n; j++)
     	{
-    		if (coords[i][j] == 0) cout << setw(8) << "  " << "O" << "  ";
-    		else if (coords[i][j] == 1) cout << setw(8) << "  " << "X" << "  ";
-    		else cout << setw(8) << "  " << "-" << "  ";
+    		if (coords[i][j] == 0) cout << "  " << "O" << "  ";
+    		else if (coords[i][j] == 1) cout << "  " << "X" << "  ";
+    		else cout << "  " << "-" << "  ";
     	}
     	cout << endl;
     }
@@ -109,30 +136,31 @@ int main()
     
     vector<vector<int> > nonogram = create_solution(length);
     int fills = 0;
-    cout << "Generated nonogram solution: " << endl;
+//    cout << "Generated nonogram solution: " << endl;
     for (int i = 0; i < nonogram.size(); i++)
     {
         for (int j = 0; j < nonogram.size(); j++)
         {
-        	cout << " " << nonogram[i][j] << " ";
+//        	cout << " " << nonogram[i][j] << " ";
         	if (nonogram[i][j] == 0) fills++;
         } 
-        cout << endl;
+//        cout << endl;
     }
 
     vector<vector<int> > clues = create_clues(length, nonogram);
-    cout << "Testing clues output: " << endl;
+    int max = find_vert_max(length,clues);
+/*    cout << "Testing clues output: " << endl;
     for (int i = 0; i < 2*length; i++)
     {
         for (int j = 0; j < clues[i].size(); j++) 
         	cout << " " << clues[i][j] << " ";
         cout << endl;
     }
-
+*/
     // will be comparing coords to solution to update board
     vector<vector<int> > coords(length,vector<int>(length,2));
     cout << "Playing Board: " << endl;
-    print_board(length,coords,clues);
+    print_board(length,max,coords,clues);
 
     int lives = 3;
     int rowNum, colNum;
@@ -149,9 +177,19 @@ int main()
     	if (nonogram[rowNum][colNum] != 0) lives--;
     	if (nonogram[rowNum][colNum] == 0) fills--;
     	coords[rowNum][colNum] = nonogram[rowNum][colNum];
-    	print_board(length,coords,clues);
+    	print_board(length,max,coords,clues);
     }
-    cout << "Thank you for playing!" << endl;
+
+    cout << "See solution below and thank you for playing!" << endl;
+    for (int i = 0; i < nonogram.size(); i++)
+    {
+        for (int j = 0; j < nonogram.size(); j++)
+        {
+        	cout << " " << nonogram[i][j] << " ";
+        	if (nonogram[i][j] == 0) fills++;
+        } 
+        cout << endl;
+    }
 
 /*
 	vector<int> blocks = random_block(length);
