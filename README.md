@@ -12,6 +12,7 @@ Final project for PIC10C
 * **06/03/2020**: spent a long time making fine edits to print the clues, especially printing the verticle clues I ultimately needed many loops to find the max length to know how many rows I needed to print before the board, then finding the right set width. I STRONGLY ADVISE choosing a board size of <10 for the sake of being able to solve a randomly generated puzzle and formatting consistency (couldn't decide on a suitable equation for setw of varying board sizes)
 * I wanted something playable to present by the end of this quarter but if time permits I will try to transfer this C++ code onto Qt for better interface
 * **06/03/2020**: I just realized belatedly during week 10 this game's concept is very similar to battleships which I know is a common coding challenge, just with clues involved - seeing as the C++ code is done I went looking for some Qt implementation of battleships that could maybe help with my nonogram implementation and found [this Github code](https://github.com/amahdy/qtbattleship) that I will look through for guidance
+* **06/04/2020**: Attempted to run battleship code but there were [similar issues](https://stackoverflow.com/questions/5511275/qt-create-and-qlabel-why-is-there-an-error) that I couldn't resolve so I simply read through the code instead of getting to see a built up run-through. Key takeaways I could try - a new class square to build the nxn board, another class that creates the board, and the mainwindow that tracks lives.
 
 ### Proposal:
 Chose **2. nonogram game**:
