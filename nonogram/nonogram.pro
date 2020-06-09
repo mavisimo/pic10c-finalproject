@@ -17,10 +17,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    nonogram.cpp
+    nonogram.cpp \
+    squarewidget.cpp
 
 HEADERS += \
-    nonogram.h
+    nonogram.h \
+    squarewidget.h
 
 FORMS += \
     nonogram.ui

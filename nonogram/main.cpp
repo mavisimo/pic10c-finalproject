@@ -1,4 +1,5 @@
 #include "nonogram.h"
+#include "squarewidget.h"
 
 #include <QApplication>
 #include <iostream>
